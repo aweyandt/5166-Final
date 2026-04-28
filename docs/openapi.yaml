@@ -4,7 +4,10 @@ info:
   version: 1.0.0
   description: REST API for managing users, projects, tasks, and labels.
 servers:
-  - url: http://localhost:3000/api
+  - url: http://localhost:3000
+    description: Local dev server
+  - url: https://five166-final.onrender.com
+    description: Prod Server
 tags:
   - name: Auth
   - name: Projects
