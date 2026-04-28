@@ -104,6 +104,21 @@ paths:
           $ref: '#/components/responses/ValidationError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+  /api/auth/users/count:
+    get:
+      tags: [Auth]
+      summary: Get the total number of registered users
+      responses:
+        '200':
+          description: Registered user total
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCount'
+              examples:
+                success:
+                  value:
+                    total_users: 3
   /health:
     get:
       tags: [System]
@@ -749,6 +764,11 @@ components:
         created_at:
           type: string
           format: date-time
+    UserCount:
+      type: object
+      properties:
+        total_users:
+          type: integer
     ProjectStatus:
       type: string
       enum: [PLANNING, IN_PROGRESS, ON_HOLD, COMPLETED]

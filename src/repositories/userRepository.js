@@ -15,3 +15,7 @@ export function findUserByUsername(username) {
 export function getUserById(id) {
   return prisma.user.findUnique({ where: { id } });
 }
+
+export function countUsers() {
+  return prisma.user.count();
+}

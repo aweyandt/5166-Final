@@ -16,6 +16,8 @@ Health checks are available at `/health`.
 
 Protected routes require a Bearer token from `/api/auth/login`.
 
+User totals are available at `/api/auth/users/count`.
+
 ## Seeded Accounts
 
 - `admin@example.com` / `Password123!`

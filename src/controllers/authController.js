@@ -1,4 +1,8 @@
-import { logIn, signUp } from '../services/authService.js';
+import {
+  getRegisteredUserTotal,
+  logIn,
+  signUp,
+} from '../services/authService.js';
 import { serializeUser } from '../utils/serializers.js';
 
 export async function signupHandler(req, res) {
@@ -9,4 +13,9 @@ export async function signupHandler(req, res) {
 export async function loginHandler(req, res) {
   const token = await logIn(req.body);
   return res.status(200).json({ token });
+}
+
+export async function userCountHandler(req, res) {
+  const totals = await getRegisteredUserTotal();
+  return res.status(200).json(totals);
 }

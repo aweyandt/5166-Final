@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {
+  countUsers,
   createUser,
   findUserByEmail,
   findUserByUsername,
@@ -38,4 +39,9 @@ export async function logIn({ email, password }) {
     process.env.JWT_SECRET,
     { expiresIn: process.env.JWT_EXPIRES_IN || '1h' },
   );
+}
+
+export async function getRegisteredUserTotal() {
+  const total_users = await countUsers();
+  return { total_users };
 }
