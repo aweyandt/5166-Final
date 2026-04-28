@@ -134,30 +134,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectListResponse'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
               examples:
                 success:
                   value:
-                    message: Request successful.
-                    data:
-                      - id: 1
-                        user_id: 2
-                        name: Database Final Project
-                        description: Complete the final project implementation and deployment deliverables.
-                        status: IN_PROGRESS
-                        due_date: '2026-04-28T23:59:00.000Z'
-                        created_at: '2026-04-27T01:00:00.000Z'
-                      - id: 2
-                        user_id: 2
-                        name: Sprint Cleanup
-                        description: Wrap up follow-up tasks and documentation.
-                        status: PLANNING
-                        due_date: '2026-05-03T17:00:00.000Z'
-                        created_at: '2026-04-27T01:05:00.000Z'
-                empty:
-                  value:
-                    message: Request successful. Nothing has been started yet.
-                    data: []
+                    - id: 1
+                      user_id: 2
+                      name: Database Final Project
+                      description: Complete the final project implementation and deployment deliverables.
+                      status: IN_PROGRESS
+                      due_date: '2026-04-28T23:59:00.000Z'
+                      created_at: '2026-04-27T01:00:00.000Z'
+                    - id: 2
+                      user_id: 2
+                      name: Sprint Cleanup
+                      description: Wrap up follow-up tasks and documentation.
+                      status: PLANNING
+                      due_date: '2026-05-03T17:00:00.000Z'
+                      created_at: '2026-04-27T01:05:00.000Z'
         '401':
           $ref: '#/components/responses/AuthRequired'
     post:
@@ -323,31 +319,27 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaskListResponse'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
               examples:
                 success:
                   value:
-                    message: Request successful.
-                    data:
-                      - id: 1
-                        project_id: 1
-                        assigned_user_id: 2
-                        title: Build Prisma schema
-                        description: Translate the ER diagram into a working Prisma schema.
-                        priority: HIGH
-                        status: IN_PROGRESS
-                        due_date: '2026-04-27T17:00:00.000Z'
-                        created_at: '2026-04-27T01:10:00.000Z'
-                        labels:
-                          - id: 2
-                            user_id: 2
-                            name: docs
-                            color: '#2563eb'
-                            created_at: '2026-04-27T01:08:00.000Z'
-                empty:
-                  value:
-                    message: Request successful. Nothing has been started yet.
-                    data: []
+                    - id: 1
+                      project_id: 1
+                      assigned_user_id: 2
+                      title: Build Prisma schema
+                      description: Translate the ER diagram into a working Prisma schema.
+                      priority: HIGH
+                      status: IN_PROGRESS
+                      due_date: '2026-04-27T17:00:00.000Z'
+                      created_at: '2026-04-27T01:10:00.000Z'
+                      labels:
+                        - id: 2
+                          user_id: 2
+                          name: docs
+                          color: '#2563eb'
+                          created_at: '2026-04-27T01:08:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -546,26 +538,22 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LabelListResponse'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Label'
               examples:
                 success:
                   value:
-                    message: Request successful.
-                    data:
-                      - id: 1
-                        user_id: 2
-                        name: bug
-                        color: '#ef4444'
-                        created_at: '2026-04-27T01:07:00.000Z'
-                      - id: 2
-                        user_id: 2
-                        name: docs
-                        color: '#2563eb'
-                        created_at: '2026-04-27T01:08:00.000Z'
-                empty:
-                  value:
-                    message: Request successful. Nothing has been created yet.
-                    data: []
+                    - id: 1
+                      user_id: 2
+                      name: bug
+                      color: '#ef4444'
+                      created_at: '2026-04-27T01:07:00.000Z'
+                    - id: 2
+                      user_id: 2
+                      name: docs
+                      color: '#2563eb'
+                      created_at: '2026-04-27T01:08:00.000Z'
         '401':
           $ref: '#/components/responses/AuthRequired'
     post:
@@ -809,15 +797,6 @@ components:
         created_at:
           type: string
           format: date-time
-    ProjectListResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
     LabelInput:
       type: object
       required: [name, color]
@@ -847,15 +826,6 @@ components:
         created_at:
           type: string
           format: date-time
-    LabelListResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Label'
     TaskInput:
       type: object
       required: [project_id, title, description]
@@ -934,15 +904,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Label'
-    TaskListResponse:
-      type: object
-      properties:
-        message:
-          type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Task'
     DeleteMessage:
       type: object
       properties:

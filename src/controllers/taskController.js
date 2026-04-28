@@ -8,17 +8,12 @@ import {
 import { serializeTask } from '../utils/serializers.js';
 
 export async function listTasksHandler(req, res) {
-  const tasks = (await listTasks(req.user, {
+  const tasks = await listTasks(req.user, {
     project_id: req.query.project_id ? Number(req.query.project_id) : undefined,
     status: req.query.status,
     priority: req.query.priority,
-  })).map(serializeTask);
-  return res.status(200).json({
-    message: tasks.length > 0
-      ? 'Request successful.'
-      : 'Request successful. Nothing has been started yet.',
-    data: tasks,
   });
+  return res.status(200).json(tasks.map(serializeTask));
 }
 
 export async function getTaskHandler(req, res) {
