@@ -12,7 +12,9 @@
     "lint": "eslint .",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "node prisma/seed.js"
+    "db:seed": "node prisma/seed.js",
+    "migrate:deploy": "prisma db push",
+    "seed:prod": "node prisma/seed.js"
   },
   "prisma": {
     "seed": "node prisma/seed.js"
