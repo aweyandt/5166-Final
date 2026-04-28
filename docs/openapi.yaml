@@ -705,6 +705,12 @@ components:
         created_at:
           type: string
           format: date-time
+      example:
+        id: 4
+        username: newuser
+        email: newuser@example.com
+        role: USER
+        created_at: '2026-04-27T12:00:00.000Z'
     ProjectStatus:
       type: string
       enum: [PLANNING, IN_PROGRESS, ON_HOLD, COMPLETED]
@@ -759,6 +765,14 @@ components:
         created_at:
           type: string
           format: date-time
+      example:
+        id: 1
+        user_id: 2
+        name: Database Final Project
+        description: Complete the final project implementation and deployment deliverables.
+        status: IN_PROGRESS
+        due_date: '2026-04-28T23:59:00.000Z'
+        created_at: '2026-04-27T01:00:00.000Z'
     LabelInput:
       type: object
       required: [name, color]
@@ -788,6 +802,12 @@ components:
         created_at:
           type: string
           format: date-time
+      example:
+        id: 1
+        user_id: 2
+        name: bug
+        color: '#ef4444'
+        created_at: '2026-04-27T01:07:00.000Z'
     TaskInput:
       type: object
       required: [project_id, title, description]
@@ -866,6 +886,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Label'
+      example:
+        id: 1
+        project_id: 1
+        assigned_user_id: 2
+        title: Build Prisma schema
+        description: Translate the ER diagram into a working Prisma schema.
+        priority: HIGH
+        status: IN_PROGRESS
+        due_date: '2026-04-27T17:00:00.000Z'
+        created_at: '2026-04-27T01:10:00.000Z'
+        labels:
+          - id: 2
+            user_id: 2
+            name: docs
+            color: '#2563eb'
+            created_at: '2026-04-27T01:08:00.000Z'
     DeleteMessage:
       type: object
       properties:
@@ -873,11 +909,16 @@ components:
           type: integer
         message:
           type: string
+      example:
+        id: 4
+        message: Resource deleted successfully
     ErrorResponse:
       type: object
       properties:
         error:
           type: string
+      example:
+        error: Resource not found
     ValidationErrorResponse:
       type: object
       properties:
@@ -885,6 +926,10 @@ components:
           type: array
           items:
             type: string
+      example:
+        errors:
+          - Name is required
+          - Description must be between 5 and 500 characters
   responses:
     AuthRequired:
       description: Authentication required
