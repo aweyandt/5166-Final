@@ -71,9 +71,16 @@ export async function createTaskForUser(user, data) {
 
 export async function updateTaskById(id, user, data) {
   const existingTask = await getTask(id);
-  const project = await getProject(existingTask.project_id);
-  if (user.role !== 'ADMIN' && project.user_id !== user.id) {
+  const currentProject = await getProject(existingTask.project_id);
+  if (user.role !== 'ADMIN' && currentProject.user_id !== user.id) {
     throw createError(403, 'Forbidden: insufficient permission');
+  }
+
+  if (data.project_id) {
+    const targetProject = await getProject(data.project_id);
+    if (user.role !== 'ADMIN' && targetProject.user_id !== user.id) {
+      throw createError(403, 'Forbidden: insufficient permission');
+    }
   }
 
   if (data.assigned_user_id) {

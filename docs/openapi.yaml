@@ -13,7 +13,30 @@ tags:
   - name: Projects
   - name: Tasks
   - name: Labels
+  - name: System
 paths:
+  /:
+    get:
+      tags: [System]
+      summary: API entry point
+      responses:
+        '200':
+          description: API metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  docs:
+                    type: string
+                  health:
+                    type: string
+              example:
+                message: Task Management API
+                docs: /api-docs
+                health: /health
   /api/auth/signup:
     post:
       tags: [Auth]
@@ -46,8 +69,6 @@ paths:
           $ref: '#/components/responses/ValidationError'
         '409':
           $ref: '#/components/responses/ConflictError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
   /api/auth/login:
     post:
       tags: [Auth]
@@ -77,10 +98,9 @@ paths:
           $ref: '#/components/responses/ValidationError'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
   /health:
     get:
+      tags: [System]
       summary: Health check
       responses:
         '200':
@@ -94,8 +114,6 @@ paths:
                     type: string
               example:
                 status: ok
-        '404':
-          $ref: '#/components/responses/NotFoundError'
   /api/projects:
     get:
       tags: [Projects]
@@ -128,8 +146,6 @@ paths:
                   created_at: '2026-04-27T01:05:00.000Z'
         '401':
           $ref: '#/components/responses/AuthRequired'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
     post:
       tags: [Projects]
       security:
@@ -165,8 +181,6 @@ paths:
           $ref: '#/components/responses/ValidationError'
         '401':
           $ref: '#/components/responses/AuthRequired'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
   /api/projects/{id}:
     get:
       tags: [Projects]
@@ -310,8 +324,6 @@ paths:
           $ref: '#/components/responses/ValidationError'
         '401':
           $ref: '#/components/responses/AuthRequired'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
     post:
       tags: [Tasks]
       security:
@@ -514,8 +526,6 @@ paths:
                   created_at: '2026-04-27T01:08:00.000Z'
         '401':
           $ref: '#/components/responses/AuthRequired'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
     post:
       tags: [Labels]
       security:
@@ -549,8 +559,6 @@ paths:
           $ref: '#/components/responses/AuthRequired'
         '409':
           $ref: '#/components/responses/ConflictError'
-        '404':
-          $ref: '#/components/responses/NotFoundError'
   /api/labels/{id}:
     get:
       tags: [Labels]
