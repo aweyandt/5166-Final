@@ -5,6 +5,7 @@ import {
   createUser,
   findUserByEmail,
   findUserByUsername,
+  listUsers,
 } from '../repositories/userRepository.js';
 import { createError } from '../utils/errors.js';
 
@@ -43,5 +44,6 @@ export async function logIn({ email, password }) {
 
 export async function getRegisteredUserTotal() {
   const total_users = await countUsers();
-  return { total_users };
+  const users = await listUsers();
+  return { total_users, users };
 }

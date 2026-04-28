@@ -16,7 +16,7 @@ Health checks are available at `/health`.
 
 Protected routes require a Bearer token from `/api/auth/login`.
 
-User totals are available at `/api/auth/users/count`.
+Registered user data is available at `/api/auth/users/count`, including `total_users` and a `users` array.
 
 ## Seeded Accounts
 

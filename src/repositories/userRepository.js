@@ -19,3 +19,9 @@ export function getUserById(id) {
 export function countUsers() {
   return prisma.user.count();
 }
+
+export function listUsers() {
+  return prisma.user.findMany({
+    orderBy: { created_at: 'asc' },
+  });
+}

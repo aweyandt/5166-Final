@@ -107,18 +107,34 @@ paths:
   /api/auth/users/count:
     get:
       tags: [Auth]
-      summary: Get the total number of registered users
+      summary: Get all registered users and the total user count
       responses:
         '200':
-          description: Registered user total
+          description: Registered users
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserCount'
+                $ref: '#/components/schemas/UserDirectory'
               examples:
                 success:
                   value:
                     total_users: 3
+                    users:
+                      - id: 1
+                        username: admin
+                        email: admin@example.com
+                        role: ADMIN
+                        created_at: '2026-04-27T00:55:00.000Z'
+                      - id: 2
+                        username: owner
+                        email: owner@example.com
+                        role: USER
+                        created_at: '2026-04-27T01:00:00.000Z'
+                      - id: 3
+                        username: not-owner
+                        email: not-owner@example.com
+                        role: USER
+                        created_at: '2026-04-27T01:03:00.000Z'
   /health:
     get:
       tags: [System]
@@ -764,11 +780,15 @@ components:
         created_at:
           type: string
           format: date-time
-    UserCount:
+    UserDirectory:
       type: object
       properties:
         total_users:
           type: integer
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
     ProjectStatus:
       type: string
       enum: [PLANNING, IN_PROGRESS, ON_HOLD, COMPLETED]

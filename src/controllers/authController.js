@@ -17,5 +17,8 @@ export async function loginHandler(req, res) {
 
 export async function userCountHandler(req, res) {
   const totals = await getRegisteredUserTotal();
-  return res.status(200).json(totals);
+  return res.status(200).json({
+    total_users: totals.total_users,
+    users: totals.users.map(serializeUser),
+  });
 }
