@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             Int       @id @default(autoincrement())
+  username       String    @unique
+  email          String    @unique
+  password_hash  String
+  role           Role      @default(USER)
+  created_at     DateTime  @default(now())
+  projects       Project[]
+  assigned_tasks Task[]    @relation("AssignedTasks")
+  labels         Label[]
+
+  @@map("users")
+}
+
+model Project {
+  id          Int           @id @default(autoincrement())
+  user_id     Int
+  name        String
+  description String
+  status      ProjectStatus @default(PLANNING)
+  due_date    DateTime?
+  created_at  DateTime      @default(now())
+  user        User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  tasks       Task[]
+
+  @@map("projects")
+}
+
+model Task {
+  id               Int          @id @default(autoincrement())
+  project_id       Int
+  assigned_user_id Int?
+  title            String
+  description      String
+  priority         TaskPriority @default(MEDIUM)
+  status           TaskStatus   @default(TODO)
+  due_date         DateTime?
+  created_at       DateTime     @default(now())
+  project          Project      @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  assigned_user    User?        @relation("AssignedTasks", fields: [assigned_user_id], references: [id], onDelete: SetNull)
+  task_labels      TaskLabel[]
+
+  @@map("tasks")
+}
+
+model Label {
+  id          Int         @id @default(autoincrement())
+  user_id     Int
+  name        String
+  color       String
+  created_at  DateTime    @default(now())
+  user        User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  task_labels TaskLabel[]
+
+  @@unique([user_id, name])
+  @@map("labels")
+}
+
+model TaskLabel {
+  task_id  Int
+  label_id Int
+  task     Task  @relation(fields: [task_id], references: [id], onDelete: Cascade)
+  label    Label @relation(fields: [label_id], references: [id], onDelete: Cascade)
+
+  @@id([task_id, label_id])
+  @@map("task_labels")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  ON_HOLD
+  COMPLETED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+  BLOCKED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}

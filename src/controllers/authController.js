@@ -1,0 +1,12 @@
+import { logIn, signUp } from '../services/authService.js';
+import { serializeUser } from '../utils/serializers.js';
+
+export async function signupHandler(req, res) {
+  const user = await signUp(req.body);
+  return res.status(201).json(serializeUser(user));
+}
+
+export async function loginHandler(req, res) {
+  const token = await logIn(req.body);
+  return res.status(200).json({ token });
+}
