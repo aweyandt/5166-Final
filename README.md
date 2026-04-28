@@ -12,6 +12,8 @@ This final project implements a REST API for authentication, projects, tasks, an
 
 Swagger UI is available at `/api-docs`.
 
+Health checks are available at `/health`.
+
 Protected routes require a Bearer token from `/api/auth/login`.
 
 ## Seeded Accounts

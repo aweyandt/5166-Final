@@ -22,7 +22,12 @@ app.get('/', (req, res) => {
   res.status(200).json({
     message: 'Task Management API',
     docs: '/api-docs',
+    health: '/health',
   });
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
 });
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
