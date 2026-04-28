@@ -33,10 +33,12 @@ paths:
                     type: string
                   health:
                     type: string
-              example:
-                message: Task Management API
-                docs: /api-docs
-                health: /health
+              examples:
+                success:
+                  value:
+                    message: Task Management API
+                    docs: /api-docs
+                    health: /health
   /api/auth/signup:
     post:
       tags: [Auth]
@@ -59,12 +61,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-              example:
-                id: 4
-                username: newuser
-                email: newuser@example.com
-                role: USER
-                created_at: '2026-04-27T12:00:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 4
+                    username: newuser
+                    email: newuser@example.com
+                    role: USER
+                    created_at: '2026-04-27T12:00:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '409':
@@ -92,8 +96,10 @@ paths:
                 properties:
                   token:
                     type: string
-              example:
-                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example.jwt
+              examples:
+                success:
+                  value:
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.example.jwt
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -112,8 +118,10 @@ paths:
                 properties:
                   status:
                     type: string
-              example:
-                status: ok
+              examples:
+                success:
+                  value:
+                    status: ok
   /api/projects:
     get:
       tags: [Projects]
@@ -129,21 +137,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Project'
-              example:
-                - id: 1
-                  user_id: 2
-                  name: Database Final Project
-                  description: Complete the final project implementation and deployment deliverables.
-                  status: IN_PROGRESS
-                  due_date: '2026-04-28T23:59:00.000Z'
-                  created_at: '2026-04-27T01:00:00.000Z'
-                - id: 2
-                  user_id: 2
-                  name: Sprint Cleanup
-                  description: Wrap up follow-up tasks and documentation.
-                  status: PLANNING
-                  due_date: '2026-05-03T17:00:00.000Z'
-                  created_at: '2026-04-27T01:05:00.000Z'
+              examples:
+                success:
+                  value:
+                    - id: 1
+                      user_id: 2
+                      name: Database Final Project
+                      description: Complete the final project implementation and deployment deliverables.
+                      status: IN_PROGRESS
+                      due_date: '2026-04-28T23:59:00.000Z'
+                      created_at: '2026-04-27T01:00:00.000Z'
+                    - id: 2
+                      user_id: 2
+                      name: Sprint Cleanup
+                      description: Wrap up follow-up tasks and documentation.
+                      status: PLANNING
+                      due_date: '2026-05-03T17:00:00.000Z'
+                      created_at: '2026-04-27T01:05:00.000Z'
         '401':
           $ref: '#/components/responses/AuthRequired'
     post:
@@ -169,14 +179,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-              example:
-                id: 3
-                user_id: 2
-                name: API Polish
-                description: Finish the final review pass.
-                status: PLANNING
-                due_date: '2026-05-05T17:00:00.000Z'
-                created_at: '2026-04-27T12:15:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 3
+                    user_id: 2
+                    name: API Polish
+                    description: Finish the final review pass.
+                    status: PLANNING
+                    due_date: '2026-05-05T17:00:00.000Z'
+                    created_at: '2026-04-27T12:15:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -196,14 +208,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-              example:
-                id: 1
-                user_id: 2
-                name: Database Final Project
-                description: Complete the final project implementation and deployment deliverables.
-                status: IN_PROGRESS
-                due_date: '2026-04-28T23:59:00.000Z'
-                created_at: '2026-04-27T01:00:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 1
+                    user_id: 2
+                    name: Database Final Project
+                    description: Complete the final project implementation and deployment deliverables.
+                    status: IN_PROGRESS
+                    due_date: '2026-04-28T23:59:00.000Z'
+                    created_at: '2026-04-27T01:00:00.000Z'
         '400':
           $ref: '#/components/responses/InvalidId'
         '401':
@@ -235,14 +249,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
-              example:
-                id: 1
-                user_id: 2
-                name: Updated Project Name
-                description: Complete the final project implementation and deployment deliverables.
-                status: COMPLETED
-                due_date: '2026-04-28T23:59:00.000Z'
-                created_at: '2026-04-27T01:00:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 1
+                    user_id: 2
+                    name: Updated Project Name
+                    description: Complete the final project implementation and deployment deliverables.
+                    status: COMPLETED
+                    due_date: '2026-04-28T23:59:00.000Z'
+                    created_at: '2026-04-27T01:00:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -265,9 +281,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteMessage'
-              example:
-                id: 3
-                message: Project deleted successfully
+              examples:
+                success:
+                  value:
+                    id: 3
+                    message: Project deleted successfully
         '400':
           $ref: '#/components/responses/InvalidId'
         '401':
@@ -304,22 +322,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
-              example:
-                - id: 1
-                  project_id: 1
-                  assigned_user_id: 2
-                  title: Build Prisma schema
-                  description: Translate the ER diagram into a working Prisma schema.
-                  priority: HIGH
-                  status: IN_PROGRESS
-                  due_date: '2026-04-27T17:00:00.000Z'
-                  created_at: '2026-04-27T01:10:00.000Z'
-                  labels:
-                    - id: 2
-                      user_id: 2
-                      name: docs
-                      color: '#2563eb'
-                      created_at: '2026-04-27T01:08:00.000Z'
+              examples:
+                success:
+                  value:
+                    - id: 1
+                      project_id: 1
+                      assigned_user_id: 2
+                      title: Build Prisma schema
+                      description: Translate the ER diagram into a working Prisma schema.
+                      priority: HIGH
+                      status: IN_PROGRESS
+                      due_date: '2026-04-27T17:00:00.000Z'
+                      created_at: '2026-04-27T01:10:00.000Z'
+                      labels:
+                        - id: 2
+                          user_id: 2
+                          name: docs
+                          color: '#2563eb'
+                          created_at: '2026-04-27T01:08:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -351,27 +371,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-              example:
-                id: 4
-                project_id: 1
-                assigned_user_id: 2
-                title: Review seed data
-                description: Confirm the sample records are usable in Swagger.
-                priority: HIGH
-                status: TODO
-                due_date: '2026-05-01T12:00:00.000Z'
-                created_at: '2026-04-27T12:20:00.000Z'
-                labels:
-                  - id: 1
-                    user_id: 2
-                    name: bug
-                    color: '#ef4444'
-                    created_at: '2026-04-27T01:07:00.000Z'
-                  - id: 2
-                    user_id: 2
-                    name: docs
-                    color: '#2563eb'
-                    created_at: '2026-04-27T01:08:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 4
+                    project_id: 1
+                    assigned_user_id: 2
+                    title: Review seed data
+                    description: Confirm the sample records are usable in Swagger.
+                    priority: HIGH
+                    status: TODO
+                    due_date: '2026-05-01T12:00:00.000Z'
+                    created_at: '2026-04-27T12:20:00.000Z'
+                    labels:
+                      - id: 1
+                        user_id: 2
+                        name: bug
+                        color: '#ef4444'
+                        created_at: '2026-04-27T01:07:00.000Z'
+                      - id: 2
+                        user_id: 2
+                        name: docs
+                        color: '#2563eb'
+                        created_at: '2026-04-27T01:08:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -395,22 +417,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-              example:
-                id: 1
-                project_id: 1
-                assigned_user_id: 2
-                title: Build Prisma schema
-                description: Translate the ER diagram into a working Prisma schema.
-                priority: HIGH
-                status: IN_PROGRESS
-                due_date: '2026-04-27T17:00:00.000Z'
-                created_at: '2026-04-27T01:10:00.000Z'
-                labels:
-                  - id: 2
-                    user_id: 2
-                    name: docs
-                    color: '#2563eb'
-                    created_at: '2026-04-27T01:08:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 1
+                    project_id: 1
+                    assigned_user_id: 2
+                    title: Build Prisma schema
+                    description: Translate the ER diagram into a working Prisma schema.
+                    priority: HIGH
+                    status: IN_PROGRESS
+                    due_date: '2026-04-27T17:00:00.000Z'
+                    created_at: '2026-04-27T01:10:00.000Z'
+                    labels:
+                      - id: 2
+                        user_id: 2
+                        name: docs
+                        color: '#2563eb'
+                        created_at: '2026-04-27T01:08:00.000Z'
         '400':
           $ref: '#/components/responses/InvalidId'
         '401':
@@ -444,27 +468,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-              example:
-                id: 1
-                project_id: 1
-                assigned_user_id: 2
-                title: Write Swagger documentation
-                description: Translate the ER diagram into a working Prisma schema.
-                priority: URGENT
-                status: DONE
-                due_date: '2026-04-27T17:00:00.000Z'
-                created_at: '2026-04-27T01:10:00.000Z'
-                labels:
-                  - id: 1
-                    user_id: 2
-                    name: bug
-                    color: '#ef4444'
-                    created_at: '2026-04-27T01:07:00.000Z'
-                  - id: 3
-                    user_id: 2
-                    name: urgent
-                    color: '#f97316'
-                    created_at: '2026-04-27T01:09:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 1
+                    project_id: 1
+                    assigned_user_id: 2
+                    title: Write Swagger documentation
+                    description: Translate the ER diagram into a working Prisma schema.
+                    priority: URGENT
+                    status: DONE
+                    due_date: '2026-04-27T17:00:00.000Z'
+                    created_at: '2026-04-27T01:10:00.000Z'
+                    labels:
+                      - id: 1
+                        user_id: 2
+                        name: bug
+                        color: '#ef4444'
+                        created_at: '2026-04-27T01:07:00.000Z'
+                      - id: 3
+                        user_id: 2
+                        name: urgent
+                        color: '#f97316'
+                        created_at: '2026-04-27T01:09:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -487,9 +513,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteMessage'
-              example:
-                id: 4
-                message: Task deleted successfully
+              examples:
+                success:
+                  value:
+                    id: 4
+                    message: Task deleted successfully
         '400':
           $ref: '#/components/responses/InvalidId'
         '401':
@@ -513,17 +541,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Label'
-              example:
-                - id: 1
-                  user_id: 2
-                  name: bug
-                  color: '#ef4444'
-                  created_at: '2026-04-27T01:07:00.000Z'
-                - id: 2
-                  user_id: 2
-                  name: docs
-                  color: '#2563eb'
-                  created_at: '2026-04-27T01:08:00.000Z'
+              examples:
+                success:
+                  value:
+                    - id: 1
+                      user_id: 2
+                      name: bug
+                      color: '#ef4444'
+                      created_at: '2026-04-27T01:07:00.000Z'
+                    - id: 2
+                      user_id: 2
+                      name: docs
+                      color: '#2563eb'
+                      created_at: '2026-04-27T01:08:00.000Z'
         '401':
           $ref: '#/components/responses/AuthRequired'
     post:
@@ -547,12 +577,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Label'
-              example:
-                id: 4
-                user_id: 2
-                name: frontend
-                color: '#22c55e'
-                created_at: '2026-04-27T12:30:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 4
+                    user_id: 2
+                    name: frontend
+                    color: '#22c55e'
+                    created_at: '2026-04-27T12:30:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -574,12 +606,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Label'
-              example:
-                id: 1
-                user_id: 2
-                name: bug
-                color: '#ef4444'
-                created_at: '2026-04-27T01:07:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 1
+                    user_id: 2
+                    name: bug
+                    color: '#ef4444'
+                    created_at: '2026-04-27T01:07:00.000Z'
         '400':
           $ref: '#/components/responses/InvalidId'
         '401':
@@ -611,12 +645,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Label'
-              example:
-                id: 1
-                user_id: 2
-                name: docs
-                color: '#2563eb'
-                created_at: '2026-04-27T01:07:00.000Z'
+              examples:
+                success:
+                  value:
+                    id: 1
+                    user_id: 2
+                    name: docs
+                    color: '#2563eb'
+                    created_at: '2026-04-27T01:07:00.000Z'
         '400':
           $ref: '#/components/responses/ValidationError'
         '401':
@@ -641,9 +677,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteMessage'
-              example:
-                id: 4
-                message: Label deleted successfully
+              examples:
+                success:
+                  value:
+                    id: 4
+                    message: Label deleted successfully
         '400':
           $ref: '#/components/responses/InvalidId'
         '401':
@@ -892,55 +930,69 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error: Not authenticated. Please provide a valid token.
+          examples:
+            failure:
+              value:
+                error: Not authenticated. Please provide a valid token.
     UnauthorizedError:
       description: Invalid credentials
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error: Invalid credentials
+          examples:
+            failure:
+              value:
+                error: Invalid credentials
     ForbiddenError:
       description: Forbidden
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error: 'Forbidden: insufficient permission'
+          examples:
+            failure:
+              value:
+                error: 'Forbidden: insufficient permission'
     NotFoundError:
       description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error: Resource not found
+          examples:
+            failure:
+              value:
+                error: Resource not found
     ConflictError:
       description: Duplicate or conflicting data
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-          example:
-            error: Email has already been used
+          examples:
+            failure:
+              value:
+                error: Email has already been used
     InvalidId:
       description: Invalid resource ID
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ValidationErrorResponse'
-          example:
-            errors:
-              - ID must be a positive integer
+          examples:
+            failure:
+              value:
+                errors:
+                  - ID must be a positive integer
     ValidationError:
       description: Validation error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ValidationErrorResponse'
-          example:
-            errors:
-              - Name is required
+          examples:
+            failure:
+              value:
+                errors:
+                  - Name is required
