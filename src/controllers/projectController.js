@@ -8,8 +8,13 @@ import {
 import { serializeProject } from '../utils/serializers.js';
 
 export async function listProjectsHandler(req, res) {
-  const projects = await listProjects(req.user);
-  return res.status(200).json(projects.map(serializeProject));
+  const projects = (await listProjects(req.user)).map(serializeProject);
+  return res.status(200).json({
+    message: projects.length > 0
+      ? 'Request successful.'
+      : 'Request successful. Nothing has been started yet.',
+    data: projects,
+  });
 }
 
 export async function getProjectHandler(req, res) {

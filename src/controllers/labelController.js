@@ -8,8 +8,13 @@ import {
 import { serializeLabel } from '../utils/serializers.js';
 
 export async function listLabelsHandler(req, res) {
-  const labels = await listLabels(req.user);
-  return res.status(200).json(labels.map(serializeLabel));
+  const labels = (await listLabels(req.user)).map(serializeLabel);
+  return res.status(200).json({
+    message: labels.length > 0
+      ? 'Request successful.'
+      : 'Request successful. Nothing has been created yet.',
+    data: labels,
+  });
 }
 
 export async function getLabelHandler(req, res) {
