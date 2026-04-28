@@ -40,7 +40,8 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
 });
 
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
+  void next;
   const status = error.status || 500;
   const message = error.message || 'Internal Server Error';
   res.status(status).json({ error: message });
